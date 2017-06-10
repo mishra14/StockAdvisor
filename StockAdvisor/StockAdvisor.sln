@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26430.12
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StockAdvisor.Utility", "Utility\StockAdvisor.Utility.csproj", "{CF0068F9-AB3E-4C1F-A800-A715239D6E0D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StockAdvisor.Sample", "SampleConsoleApp\StockAdvisor.Sample.csproj", "{3B1329F5-DD73-4503-A13D-92239AD3EFF0}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CF0068F9-AB3E-4C1F-A800-A715239D6E0D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CF0068F9-AB3E-4C1F-A800-A715239D6E0D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CF0068F9-AB3E-4C1F-A800-A715239D6E0D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CF0068F9-AB3E-4C1F-A800-A715239D6E0D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3B1329F5-DD73-4503-A13D-92239AD3EFF0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3B1329F5-DD73-4503-A13D-92239AD3EFF0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3B1329F5-DD73-4503-A13D-92239AD3EFF0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3B1329F5-DD73-4503-A13D-92239AD3EFF0}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
