@@ -65,6 +65,43 @@ namespace StockAdvisor.Utility
             return result;
         }
 
+        public static IDictionary<string, double> GetCurrentPrice(IEnumerable<string> stockSymbols)
+        {
+            var result = new Dictionary<string, double>();
+            if (stockSymbols.Any())
+            {
+                StringBuilder requestUrl = new StringBuilder();
+
+                requestUrl.Append(BaseRequestUrl);
+
+                foreach (var stock in stockSymbols)
+                {
+                    requestUrl.Append(stock);
+                    requestUrl.Append(",");
+                }
+
+                var jArray = GetJsonResponse(requestUrl.ToString());
+
+                foreach (var stockData in jArray)
+                {
+                    var symbol = stockData["t"].Value<string>();
+                    var hasPrice = Double.TryParse(stockData["l"].Value<string>(), out double price);
+
+                    if (hasPrice)
+                    {
+                        result.Add(symbol, price);
+                    }
+                    else
+                    {
+                        result.Add(symbol, -1);
+                    }
+                }
+
+            }
+
+            return result;
+        }
+
         private static JArray GetJsonResponse(string requestUrl)
         {
             var response = GetResponse(requestUrl);

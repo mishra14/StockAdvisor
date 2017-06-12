@@ -11,20 +11,15 @@ namespace StockAdvisor.Sample
         {
             var google = new Stock("GOOG", "Google");
             var microsoft = new Stock("MSFT", "Microsoft");
+            var portfolio = new Portfolio();
+
+            portfolio.AddToWatchList(google);
+            portfolio.AddToWatchList(microsoft);
+
             while (true)
             {
-                Console.WriteLine("=====================================================================");
-                var prices = Market.GetCurrentPrice(new List<Stock> { google, microsoft });
-
-                Console.WriteLine($"Time: {DateTimeOffset.UtcNow}");
-                PrintPrice(google.Company, prices[google.Symbol]);
-                PrintPrice(microsoft.Company, prices[microsoft.Symbol]);
+                portfolio.UpdateAndDisplayWatchList();                
             }
-        }
-
-        static void PrintPrice(string company, double price)
-        {
-            Console.WriteLine(string.Format($"{company}: {price}", company, price));
         }
     }
 }
