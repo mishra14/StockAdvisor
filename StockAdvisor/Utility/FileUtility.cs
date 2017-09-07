@@ -10,6 +10,7 @@ namespace StockAdvisor.Utility
 {
     public static class FileUtility
     {
+        // AlphaVantage API docs - https://www.alphavantage.co/documentation/
         private const string apiKey = "apikey";
         private const string baseUrl = "baseurl";
         private const string rawdataurl = "rawdataurl";
