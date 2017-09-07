@@ -12,7 +12,9 @@ namespace StockAdvisor.Utility
         public IDictionary<string, StockData> PortfolioStocks { get; private set; } = new Dictionary<string, StockData>(StringComparer.OrdinalIgnoreCase);
 
         // Symbol -> Price
-        public IDictionary<string, double> WatchListStocks{ get; private set; } = new Dictionary<string, double>(StringComparer.OrdinalIgnoreCase);
+        public IDictionary<string, StockData> WatchListStocks{ get; private set; } = new Dictionary<string, StockData>(StringComparer.OrdinalIgnoreCase);
+
+        public Market Market { get; private set; } = new Market();
 
         /// <summary>
         /// Update the portfolio on stock buy.
@@ -62,7 +64,7 @@ namespace StockAdvisor.Utility
         {
             if (!WatchListStocks.ContainsKey(stock.Symbol))
             {
-                WatchListStocks[stock.Symbol] = 0;
+                WatchListStocks[stock.Symbol] = new StockData(stock);
             }
         }
 
@@ -82,9 +84,20 @@ namespace StockAdvisor.Utility
 
         public void UpdateWatchList()
         {
-            
+            //UpdateWatchListCurrentPrice();
+            UpdateWatchListSMA();
+        }
+
+        public void UpdateWatchListSMA()
+        {
             // Update the watch list
-            WatchListStocks = Market.GetCurrentPrice(WatchListStocks.Keys.ToList());
+            Market.UpdateSMA(WatchListStocks.Values.ToList());
+        }
+
+        public void UpdateWatchListCurrentPrice()
+        {
+            // Update the watch list
+            Market.UpdateCurrentPrice(WatchListStocks.Values.ToList());
         }
 
         public void DisplayWatchList()
@@ -93,14 +106,14 @@ namespace StockAdvisor.Utility
             Console.WriteLine($"Time: {DateTimeOffset.UtcNow}");
             foreach (var symbol in WatchListStocks.Keys)
             {
-                PrintPrice(symbol, WatchListStocks[symbol]);
+                PrintPrice(WatchListStocks[symbol]);
             }
             Console.WriteLine("=====================================================================");
         }
 
-        private void PrintPrice(string company, double price)
+        private void PrintPrice(StockData stockData)
         {
-            Console.WriteLine(string.Format($"{company}: {price}", company, price));
+            Console.Write(stockData.GetPrintData());
         }
     }
 }

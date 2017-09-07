@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Threading;
 
 namespace StockAdvisor.Sample
 {
@@ -18,7 +19,10 @@ namespace StockAdvisor.Sample
 
             while (true)
             {
-                portfolio.UpdateAndDisplayWatchList();                
+                portfolio.UpdateAndDisplayWatchList();
+
+                // sleep for a minute
+                Thread.Sleep(60000);
             }
         }
     }

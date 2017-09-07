@@ -14,6 +14,13 @@ namespace StockAdvisor.Utility
 
         public double TotalProfit { get; private set; }
 
+        public double SMA { get; private set; }
+
+        public double LastPrice { get; set; }
+
+        public DateTimeOffset LastRefresh { get; set; }
+
+
         public StockData(Stock stock)
         {
             Stock = stock;
@@ -33,6 +40,15 @@ namespace StockAdvisor.Utility
             Count -= count;
 
             return 0;
+        }
+
+        public string GetPrintData()
+        {
+            return $"{Stock.Symbol}: " +
+                $"{Environment.NewLine}\tLast Refresh: {LastRefresh.ToLocalTime()}" +
+                $"{Environment.NewLine}\tLast Price: {LastPrice}" +
+                $"{Environment.NewLine}\tSMA: {SMA}" + 
+                $"{Environment.NewLine}";
         }
     }
 }
