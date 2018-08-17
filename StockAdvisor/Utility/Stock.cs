@@ -14,6 +14,5 @@ namespace StockAdvisor.Utility
             Symbol = symbol;
             Company = company;
         }
-
     }
 }

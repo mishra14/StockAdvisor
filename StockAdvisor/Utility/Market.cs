@@ -14,7 +14,7 @@ namespace StockAdvisor.Utility
     {
         public Source Source { get; set; }
 
-        private DateTimeOffset LastCall { get; set; } 
+        private DateTimeOffset LastCall { get; set; }
 
         public Market()
         {
@@ -46,16 +46,19 @@ namespace StockAdvisor.Utility
             {
                 UpdateSMA(stockSymbol);
             }
-
         }
 
         // Simple Moving Average
         public void UpdateSMA(StockData stock)
         {
-            var smaUrl = Source.GetSmaUrl(Source.SmaInterval.Daily, Source.SeriesType.Close, 50);
+            var smaUrl = Source.GetSmaUrl(Source.SmaInterval.Daily, Source.SeriesType.Close, dataPointCount: 50);
             var requestUrl = Source.AddSymbolToUrl(smaUrl, stock.Stock.Symbol);
-            var jObject = GetJsonResponse(requestUrl.ToString());
+            var response = JsonUtility.ParseJsonForStockResponse(GetJsonResponse(requestUrl.ToString()));
 
+            if (response != null)
+            {
+                stock.UpdateSma(response);
+            }
         }
 
         private void WaitForMinInterval()

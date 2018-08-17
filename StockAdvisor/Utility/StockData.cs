@@ -10,16 +10,19 @@ namespace StockAdvisor.Utility
 
         public int Count { get; private set; }
 
-        public double AverageCost {get; private set; }
+        public double AverageCost { get; private set; }
 
         public double TotalProfit { get; private set; }
 
         public double SMA { get; private set; }
 
+        public Response SmaResponse { get; private set; }
+
         public double LastPrice { get; set; }
 
-        public DateTimeOffset LastRefresh { get; set; }
+        public Response PriceResponse { get; private set; }
 
+        public DateTimeOffset LastRefresh { get; set; }
 
         public StockData(Stock stock)
         {
@@ -42,12 +45,21 @@ namespace StockAdvisor.Utility
             return 0;
         }
 
+        public void UpdateSma(Response response)
+        {
+            SmaResponse = response;
+        }
+
+        public void UpdatePrice(Response response)
+        {
+            PriceResponse = response;
+        }
+
         public string GetPrintData()
         {
             return $"{Stock.Symbol}: " +
                 $"{Environment.NewLine}\tLast Refresh: {LastRefresh.ToLocalTime()}" +
                 $"{Environment.NewLine}\tLast Price: {LastPrice}" +
-                $"{Environment.NewLine}\tSMA: {SMA}" + 
                 $"{Environment.NewLine}";
         }
     }

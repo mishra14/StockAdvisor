@@ -44,9 +44,9 @@ namespace StockAdvisor.Utility
 
         public string SmaUrl { get; set; }
 
-        public string GetSmaUrl(SmaInterval interval, SeriesType seriesType, int count)
+        public string GetSmaUrl(SmaInterval interval, SeriesType seriesType, int dataPointCount)
         {
-            return $"{SmaUrl}&{_smaIntervalParam}={_smaIntervalParamValues[(int)interval]}&{_seriesTypeParam}={_seriesTypeParamValues[(int)seriesType]}&{_timePeriodParam}={count}";
+            return $"{SmaUrl}&{_smaIntervalParam}={_smaIntervalParamValues[(int)interval]}&{_seriesTypeParam}={_seriesTypeParamValues[(int)seriesType]}&{_timePeriodParam}={dataPointCount}";
         }
 
         public string AddSymbolToUrl(string url, string symbol)
